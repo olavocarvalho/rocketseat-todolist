@@ -18,6 +18,16 @@
   --blue: #4ea8de;
   --bluedark: #1e6f9f;
   --danger: #e25858;
+  --blackshaddow: rgba(0, 0, 0, 0.06);
+}
+
+:focus {
+  outline: transparent;
+}
+
+/* reset */
+button {
+  all: unset;
 }
 
 * {
