@@ -40,6 +40,8 @@ export function Form({ onCreateNewTask }: FormProps) {
         setTaskText(newTaskText)
     }
 
+    const submitButtonDisabledStatus = taskText === "" ? true : false
+
     return (
         <form onSubmit={handleCreateNewTask} className={styles.form_wrapper}>
             <input
@@ -48,7 +50,7 @@ export function Form({ onCreateNewTask }: FormProps) {
                 value={taskText}
                 placeholder="Type here the task you want to add"
                 onChange={handleTaskToAddChange} />
-            <button type="submit">Create <PlusCircledIcon /></button>
+            <button type="submit" disabled={submitButtonDisabledStatus} >Create <PlusCircledIcon /></button>
         </form>
     )
 }

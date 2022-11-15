@@ -20,6 +20,7 @@ export function Task({ id, content, completed, onDeleteTask, onTaskStatusChange 
     }
 
     function handleTaskStatus(event: boolean) {
+        setIsCompleted(event)
         onTaskStatusChange(id, event)
     }
     return (

@@ -3,12 +3,28 @@ import styles from './TaskList.module.css'
 import { useState } from 'react'
 import React from 'react'
 import { Form } from '../Form/Form'
+import { ActivityLogIcon } from '@radix-ui/react-icons'
 
 interface Task {
     id: string,
     content: string,
     completed: boolean
 }
+
+const EmptyState = () => {
+    return (
+        <div className={styles.tasklist_empty}>
+            <h3>
+                <ActivityLogIcon className={styles.ActivityLogIcon} />
+            </h3>
+            <p>
+                <strong>Você ainda não tem tarefas cadastradas</strong>
+                <br />Crie tarefas e organize seus itens a fazer
+            </p>
+        </div>
+    );
+};
+
 
 export function TaskList() {
 
@@ -44,6 +60,8 @@ export function TaskList() {
 
     const taskCompletedCounter = tasks.reduce((counter, task) => task.completed === true ? ++counter : counter, 0)
 
+    const showEmptyState = tasks.length === 0
+
     return (
         <React.Fragment>
             <Form onCreateNewTask={createNewTask} />
@@ -58,7 +76,10 @@ export function TaskList() {
                     </div>
                 </div>
                 <div className={styles.tasklist_body}>
-                    {tasks.map(task => {
+
+                    {showEmptyState && (<EmptyState />)}
+
+                    {!showEmptyState && tasks.map(task => {
                         return (
                             <Task
                                 id={task.id}

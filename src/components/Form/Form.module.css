@@ -38,7 +38,7 @@
 
 .form_wrapper button {
     background: var(--bluedark);
-    border: 0px solid var(--bluedark);
+    border: 1px solid var(--bluedark);
     border-radius: 8px;
     padding: 1rem;
     color: var(--gray100);
@@ -46,6 +46,12 @@
     transition: ease-in, all .35s ease-out;
 }
 
-.form_wrapper button:hover {
+.form_wrapper button[disabled],
+.form_wrapper button:disabled {
+    cursor: not-allowed;
+}
+
+.form_wrapper button[disabled=false]:hover {
+    border: 1px solid var(--blue);
     background: var(--blue);
 }
