@@ -1,23 +1,41 @@
 import styles from './Form.module.css';
 import { PlusCircledIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent, SyntheticEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-export function Form({ onCreateNewTask }) {
+interface OnCreateNewTask {
+    id: string,
+    content: string,
+    completed: boolean
+}
+
+interface FormProps {
+    onCreateNewTask: ({ id, content, completed }: OnCreateNewTask) => void
+}
+
+interface AddTaskFormElements extends HTMLFormControlsCollection {
+    taskToAdd: HTMLInputElement;
+}
+interface AddTaskForm extends HTMLFormElement {
+    readonly elements: AddTaskFormElements;
+}
+
+export function Form({ onCreateNewTask }: FormProps) {
 
     const [tasks, setTasks] = useState("")
     const [taskText, setTaskText] = useState("")
 
-    function handleCreateNewTask(event) {
+    function handleCreateNewTask(event: FormEvent<AddTaskForm>) {
         event.preventDefault()
+        const target = event.currentTarget.elements;
 
-        const newTask = event.target.taskToAdd.value
-        onCreateNewTask({ id: uuidv4(), content: newTask })
+        const newTask = target.taskToAdd.value
+        onCreateNewTask({ id: uuidv4(), content: newTask, completed: false })
         setTaskText("");
 
     }
 
-    function handleTaskToAddChange(event): void {
+    function handleTaskToAddChange(event: ChangeEvent<HTMLInputElement>) {
         const newTaskText = event.target.value
         setTaskText(newTaskText)
     }

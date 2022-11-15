@@ -34,7 +34,7 @@ export function TaskList() {
         setTasks(taskListWithUpdatedTask)
     }
 
-    function createNewTask(taskToAdd: task) {
+    function createNewTask(taskToAdd: Task) {
         const newTaskList = [...tasks, taskToAdd]
 
         setTasks(newTaskList)
